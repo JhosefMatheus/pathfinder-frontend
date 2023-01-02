@@ -1,5 +1,5 @@
 import {
-    useEffect,
+    useContext,
     useState
 } from "react";
 
@@ -17,6 +17,7 @@ import {
 
 import CloseIcon from "@mui/icons-material/Close";
 import User from "../models/User";
+import { UserContext } from "../providers/UserProvider";
 
 export default function Home() {
     const [openAlert, setOpenAlert] = useState(false);
@@ -25,21 +26,20 @@ export default function Home() {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
 
-    useEffect(() => {
-        console.log("rodei quando o componente foi montado");
-    }, []);
-
-    useEffect(() => {
-        console.log("login foi alterado");
-    }, [login]);
+    const provider = useContext(UserContext);
 
     async function signInButtonClick() {
         const user = new User({ login, password });
 
-        const { flag, message, token } = await user.signIn();
+        const { flag, message, token, userInfo } = await user.signIn();
 
         if (flag) {
             localStorage.setItem("token", token);
+            localStorage.setItem("user", JSON.stringify(userInfo));
+
+            const { id, name, login } = user;
+
+            provider.setUser({ id, name, login });
 
             window.location = "/pathfinders";
         } else {

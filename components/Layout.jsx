@@ -8,7 +8,12 @@ import { AccountCircle } from "@mui/icons-material";
 
 export default function Layout({ children }) {
     return (
-        <Box>
+        <Box
+            sx={{
+                backgroundColor: "#F9FAFC",
+                height: "100%"
+            }}
+        >
             <AppBar
                 position="sticky"
                 component="nav"

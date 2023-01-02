@@ -62,13 +62,19 @@ export default class User {
                 body: JSON.stringify(requestBody)
             });
 
-            const { message, token } = await signInResponse.json();
+            const { message, token, userInfo } = await signInResponse.json();
 
             if (signInResponse.status === 200) {
+                const { id, name } = userInfo;
+
+                this.#id = id;
+                this.#name = name;
+
                 return {
                     flag: true,
                     message,
-                    token
+                    token,
+                    userInfo
                 }
 
             } else if (signInResponse.status === 401) {
@@ -104,6 +110,56 @@ export default class User {
                 message
             }
         } else if (signUpResponse.status === 401) {
+            return {
+                flag: false,
+                message
+            }
+        }
+    }
+
+    async getPathfinders(token) {
+        const getPathfindersResponse = await fetch(`${nextConfig.urlApi.dev}/pathfinder/pathfinders/${this.#id}`, {
+            method: "GET",
+            headers: {
+                "accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        const { pathfinders } = await getPathfindersResponse.json();
+
+        if (getPathfindersResponse.status === 200) {
+            return {
+                flag: true,
+                pathfinders
+            }
+        }
+    }
+
+    async createPathfinder(token, pathfinderName) {
+        const requestBody = {
+            pathfinderName
+        }
+
+        const createPathfinderResponse = await fetch(`${nextConfig.urlApi.dev}/pathfinder/create/${this.#id}`, {
+            method: "POST",
+            headers: {
+                "accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(requestBody)
+        });
+
+        const { message } = await createPathfinderResponse.json();
+
+        if (createPathfinderResponse.status === 200) {
+            return {
+                flag: true,
+                message
+            }
+        } else if (createPathfinderResponse.status === 401) {
             return {
                 flag: false,
                 message

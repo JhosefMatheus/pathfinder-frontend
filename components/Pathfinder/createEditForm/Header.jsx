@@ -1,10 +1,6 @@
-import {
-    Box,
-    Typography,
-    Button
-} from "@mui/material";
+import { Typography, Button, Box } from "@mui/material";
 
-export default function PathfinderHeader() {
+export default function Header({ edit }) {
     return (
         <Box
             sx={{
@@ -16,17 +12,27 @@ export default function PathfinderHeader() {
         >
             <Typography
                 variant="h4"
+                sx={{
+                    fontWeight: 600
+                }}
             >
-                Desbravadores
+                {
+                    edit ? (
+                        "Editar desbravador"
+                    ) : (
+                        "Adicionar desbravador"
+                    )
+                }
             </Typography>
             <Button
                 variant="contained"
+                href="/pathfinders"
                 sx={{
                     textTransform: "none",
                     fontWeight: 600
                 }}
             >
-                Add Desbravador
+                Desbravadores
             </Button>
         </Box>
     );
