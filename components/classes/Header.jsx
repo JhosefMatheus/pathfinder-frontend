@@ -1,8 +1,4 @@
-import {
-    Box,
-    Typography,
-    Button
-} from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 
 export default function Header() {
     return (
@@ -16,17 +12,14 @@ export default function Header() {
         >
             <Typography
                 variant="h4"
-                sx={{
-                    fontWeight: 600
-                }}
             >
-                Desbravadores
+                Classes
             </Typography>
             <Button
                 variant="contained"
-                href="/pathfinders/add"
+                href="/pathfinders"
             >
-                Add Desbravador
+                Desbravadores
             </Button>
         </Box>
     );

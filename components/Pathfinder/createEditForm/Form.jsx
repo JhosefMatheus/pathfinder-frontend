@@ -22,9 +22,19 @@ export default function Form({ edit, nome, setNome, setOpenError, setErrorMessag
                 )
             }
             <Divider variant="fullWidth"/>
-            <Fields
-                setNome={setNome}
-            />
+            {
+                edit ? (
+                    <Fields
+                        edit
+                        nome={nome}
+                        setNome={setNome}
+                    />
+                ) : (
+                    <Fields
+                        setNome={setNome}
+                    />
+                )
+            }
             <Divider variant="fullWidth" />
             {
                 edit ? (

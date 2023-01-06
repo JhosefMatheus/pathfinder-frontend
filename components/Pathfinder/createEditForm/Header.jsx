@@ -27,10 +27,6 @@ export default function Header({ edit }) {
             <Button
                 variant="contained"
                 href="/pathfinders"
-                sx={{
-                    textTransform: "none",
-                    fontWeight: 600
-                }}
             >
                 Desbravadores
             </Button>

@@ -53,7 +53,7 @@ export default function PathfinderTable({ pathfinders, setOpenError, setErrorMes
             <TableBody>
                 {
                     pathfinders.map(pathfinder => (
-                        <TableRow>
+                        <TableRow key={pathfinder.id}>
                             <TableCell>
                                 {pathfinder.name}
                             </TableCell>
@@ -72,6 +72,7 @@ export default function PathfinderTable({ pathfinders, setOpenError, setErrorMes
                                 </Button>
                                 <Button
                                     variant="contained"
+                                    href={`pathfinders/classes/${pathfinder.id}`}
                                 >
                                     Classes
                                 </Button>
