@@ -1,8 +1,8 @@
 import { Box, Button } from "@mui/material";
 import { useContext } from "react";
 import { UserContext } from "../../../providers/UserProvider";
-import User from "../../../models/User";
-import Pathfinder from "../../../models/Pathfinder";
+import UserModel from "../../../models/UserModel";
+import PathfinderModel from "../../../models/PathfinderModel";
 import { useRouter } from "next/router";
 
 export default function CreateEditFormOptions({ edit, nome, setOpenError, setErrorMessage }) {
@@ -10,7 +10,7 @@ export default function CreateEditFormOptions({ edit, nome, setOpenError, setErr
     const router = useRouter();
 
     async function createPathfinder() {
-        const user = new User({ id: provider.user.id, name: provider.user.name, login: provider.user.login });
+        const user = new UserModel({ id: provider.user.id, name: provider.user.name, login: provider.user.login });
 
         const token = localStorage.getItem("token");
 
@@ -39,7 +39,7 @@ export default function CreateEditFormOptions({ edit, nome, setOpenError, setErr
 
             setOpenError(true);
         } else {
-            const pathfinder = new Pathfinder({ id: router.query.id, name: nome, userId: provider.user.id });
+            const pathfinder = new PathfinderModel({ id: router.query.id, name: nome, userId: provider.user.id });
 
             const { flag, message } = await pathfinder.editPathfinder(token);
 

@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import RequirementsModel from "../../models/RequirementsModel";
 import nextConfig from "../../next.config";
 import Requirement from "./Requirement";
 
@@ -12,21 +13,13 @@ export default function Requirements({ requirementGroupId }) {
         async function getRequirements() {
             const token = localStorage.getItem("token");
 
-            const getRequirementsResponse = await fetch(`${nextConfig.urlApi.dev}/class/classes/requirements/${router.query.classId}/${requirementGroupId}`, {
-                method: "GET",
-                headers: {
-                    "accept": "application/json",
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                }
-            });
+            const requirementsModel = new RequirementsModel({});
 
-            const { message, requirements } = await getRequirementsResponse.json();
+            const getRequirementsResult = await requirementsModel.getRequirements(token, router.query.classId, requirementGroupId);
 
-            if (getRequirementsResponse.status === 200) {
-                console.log(requirements)
-                setRequirements(requirements);
-            } else if (getRequirementsResponse.status === 401) {
+            if (getRequirementsResult) {
+                setRequirements(requirementsModel.requirements);
+            } else {
                 router.push(`pathfinders/classes/${router.query.id}`);
             }
         }

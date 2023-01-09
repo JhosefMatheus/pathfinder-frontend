@@ -5,10 +5,11 @@ import Header from "../../../../components/class/Header";
 import RequirementGroups from "../../../../components/class/RequirementGroups";
 import Layout from "../../../../components/Layout";
 import PrivateRoute from "../../../../components/PrivateRoute";
+import ClassModel from "../../../../models/ClassModel";
 import nextConfig from "../../../../next.config";
 
 export default function ClassPage() {
-    const [classData, setClassData] = useState(null);
+    const [currentClass, setCurrentClass] = useState(null);
 
     const router = useRouter();
 
@@ -16,20 +17,13 @@ export default function ClassPage() {
         async function getClassData() {
             const token = localStorage.getItem("token");
 
-            const getClassDataResponse = await fetch(`${nextConfig.urlApi.dev}/class/${router.query.classId}`, {
-                method: "GET",
-                headers: {
-                    "accept": "application/json",
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                }
-            });
+            const classModel = new ClassModel({ id: router.query.classId });
 
-            const { selectedClass } = await getClassDataResponse.json();
+            const getClassDataResult = await classModel.getClassData(token);
 
-            if (getClassDataResponse.status === 200) {
-                setClassData(selectedClass);
-            } else if (getClassDataResponse.status === 401) {
+            if (getClassDataResult) {
+                setCurrentClass(classModel);
+            } else {
                 router.push(`pathfinders/classes/${router.query.id}`);
             }
         }
@@ -44,9 +38,9 @@ export default function ClassPage() {
             <Layout>
                 <Container>
                     {
-                        classData && (
+                        currentClass && (
                             <Header
-                                title={classData.name}
+                                title={currentClass.name}
                             />
                         )
                     }

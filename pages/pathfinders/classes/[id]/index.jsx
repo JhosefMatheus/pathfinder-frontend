@@ -5,7 +5,7 @@ import Classes from "../../../../components/classes/Classes";
 import Header from "../../../../components/classes/Header";
 import Layout from "../../../../components/Layout";
 import PrivateRoute from "../../../../components/PrivateRoute";
-import Class from "../../../../models/Class";
+import ClassModel from "../../../../models/ClassModel";
 
 export default function PathfinderClasses() {
     const [classes, setClasses] = useState([]);
@@ -14,7 +14,7 @@ export default function PathfinderClasses() {
         async function getClasses() {
             const token = localStorage.getItem("token");
 
-            const classModel = new Class({});
+            const classModel = new ClassModel({});
 
             const classes = await classModel.getClasses(token);
 

@@ -34,7 +34,8 @@ export default function Layout({ children }) {
         <Box
             sx={{
                 backgroundColor: "#F9FAFC",
-                height: "100%"
+                height: "100%",
+                overflow: "auto"
             }}
         >
             <AppBar

@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
-import User from "../models/User";
+import UserModel from "../models/UserModel";
 
 export default function Register() {
     const [name, setName] = useState("");
@@ -35,7 +35,7 @@ export default function Register() {
 
             setOpenAlert(true);
         } else {
-            const user = new User({ name, login, password });
+            const user = new UserModel({ name, login, password });
 
             const { flag, message } = await user.signUp();
 

@@ -5,7 +5,7 @@ import Header from "../../components/Pathfinder/index/Header";
 import SearchBar from "../../components/Pathfinder/index/SearchBar";
 import Table from "../../components/Pathfinder/index/Table";
 import PrivateRoute from "../../components/PrivateRoute";
-import User from "../../models/User";
+import UserModel from "../../models/UserModel";
 import { UserContext } from "../../providers/UserProvider";
 
 export default function Pathfinders() {
@@ -20,7 +20,7 @@ export default function Pathfinders() {
         async function getPathfinders() {
             const { id, name, login } = provider.user;
 
-            const user = new User({ id, name, login });
+            const user = new UserModel({ id, name, login });
 
             const token = localStorage.getItem("token");
 

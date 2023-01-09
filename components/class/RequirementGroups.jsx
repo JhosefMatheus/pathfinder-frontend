@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import nextConfig from "../../next.config";
 import RequirementGroup from "./RequirementGroup";
+import RequirementGroupsModel from "../../models/RequirementGroupsModel";
 
 export default function RequirementGroups() {
     const [requirementGroups, setRequirementGroups] = useState([]);
@@ -9,18 +10,11 @@ export default function RequirementGroups() {
         async function getRequirementGroups() {
             const token = localStorage.getItem("token");
 
-            const getRequirementGroupsResponse = await fetch(`${nextConfig.urlApi.dev}/class/classes/requirementGroups`, {
-                method: "GET",
-                headers: {
-                    "accept": "application/json",
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                }
-            });
+            const requirementGroupsModel = new RequirementGroupsModel({});
 
-            const { requirementGroups } = await getRequirementGroupsResponse.json();
+            await requirementGroupsModel.getRequirementGroups(token);
 
-            setRequirementGroups(requirementGroups);
+            setRequirementGroups(requirementGroupsModel.requirementGroups);
         }
 
         getRequirementGroups();

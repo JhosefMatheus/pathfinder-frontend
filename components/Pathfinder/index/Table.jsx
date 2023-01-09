@@ -7,7 +7,7 @@ import {
     TableRow
 } from "@mui/material";
 import { useRouter } from "next/router";
-import Pathfinder from "../../../models/Pathfinder";
+import PathfinderModel from "../../../models/PathfinderModel";
 
 export default function PathfinderTable({ pathfinders, setOpenError, setErrorMessage }) {
     const router = useRouter();
@@ -15,7 +15,7 @@ export default function PathfinderTable({ pathfinders, setOpenError, setErrorMes
     async function deletePathfinder(pathfinder) {
         const token = localStorage.getItem("token");
 
-        const currentPathfinder = new Pathfinder({ ...pathfinder });
+        const currentPathfinder = new PathfinderModel({ ...pathfinder });
 
         const { message, flag } = await currentPathfinder.deletePathfinder(token);
 

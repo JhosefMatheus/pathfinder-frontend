@@ -1,6 +1,6 @@
 import nextConfig from "../next.config";
 
-export default class User {
+export default class UserModel {
     #id;
     #name;
     #login;

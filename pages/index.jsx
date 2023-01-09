@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
-import User from "../models/User";
+import UserModel from "../models/UserModel";
 import { UserContext } from "../providers/UserProvider";
 
 export default function Home() {
@@ -29,7 +29,7 @@ export default function Home() {
     const provider = useContext(UserContext);
 
     async function signInButtonClick() {
-        const user = new User({ login, password });
+        const user = new UserModel({ login, password });
 
         const { flag, message, token, userInfo } = await user.signIn();
 

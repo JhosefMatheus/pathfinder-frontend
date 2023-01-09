@@ -1,6 +1,6 @@
 import nextConfig from "../next.config";
 
-export default class Pathfinder {
+export default class PathfinderModel {
     #id;
     #name;
     #userId;

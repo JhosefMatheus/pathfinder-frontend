@@ -1,6 +1,3 @@
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import nextConfig from "../../next.config";
 import Requirements from "./Requirements";
 
 export default function RequirementGroup({ requirementGroup }) {
