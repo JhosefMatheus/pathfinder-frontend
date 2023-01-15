@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import nextConfig from "../../next.config";
 import RequirementGroup from "./RequirementGroup";
 import RequirementGroupsModel from "../../models/RequirementGroupsModel";
 
-export default function RequirementGroups() {
+export default function RequirementGroups({ requirementsPathfinder }) {
     const [requirementGroups, setRequirementGroups] = useState([]);
 
     useEffect(() => {
@@ -18,6 +17,7 @@ export default function RequirementGroups() {
         }
 
         getRequirementGroups();
+        console.log(requirementsPathfinder);
     }, [])
 
     return (
@@ -28,6 +28,7 @@ export default function RequirementGroups() {
                 requirementGroups.map(requirementGroup => (
                     <RequirementGroup
                         requirementGroup={requirementGroup}
+                        requirementsPathfinder={requirementsPathfinder}
                     />
                 ))
             }

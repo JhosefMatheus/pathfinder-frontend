@@ -45,4 +45,28 @@ export default class RequirementModel {
 
         return new SubRequirementsModel({ subRequirements: subRequirements.map(subRequirement => new SubRequirementModel({ id: subRequirement.id, content: subRequirement.content, subrequirementTypeId: subRequirement.subrequirementTypeId, requirementId: subRequirement.requirementId })) });
     }
+
+    async getRequirementPathfinder(token, pathfinderId) {
+        const getRequirementPathfinderResponse = await fetch(`${nextConfig.urlApi.dev}/requirementPathfinder/requirementsPathfinder/${pathfinderId}/${this.#id}`, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        const { message, requirementPathfinder } = await getRequirementPathfinderResponse.json();
+
+        if (getRequirementPathfinderResponse.status === 200) {
+            return {
+                flag: true,
+                requirementPathfinder
+            }
+        }
+
+        return {
+            flag: false
+        }
+    }
 }

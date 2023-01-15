@@ -1,6 +1,5 @@
-import { Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import { useEffect, useState } from "react";
-import ClassCard from "../../../../components/classes/ClassCard";
 import Classes from "../../../../components/classes/Classes";
 import Header from "../../../../components/classes/Header";
 import Layout from "../../../../components/Layout";

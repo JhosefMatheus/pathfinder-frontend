@@ -1,9 +1,12 @@
 import SubRequirements from "./SubRequirements";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
-export default function Requirement({ requirement }) {
+export default function Requirement({ requirement, requirementsPathfinder }) {
     const [checkedRequirement, setCheckedRequirement] = useState(false);
     const [subRequirements, setSubRequirements] = useState([]);
+
+    const router = useRouter();
 
     useEffect(() => {
         async function getSubRequirements() {
@@ -16,6 +19,22 @@ export default function Requirement({ requirement }) {
 
         getSubRequirements();
     }, []);
+
+    useEffect(() => {
+        async function getRequirementPathfinder() {
+            const token = localStorage.getItem("token");
+
+            const { flag, requirementPathfinder } = await requirement.getRequirementPathfinder(token, router.query.id);
+
+            if (flag) {
+
+            }
+        }
+
+        if (router.query.id) {
+
+        }
+    }, [router.query.id]);
 
     return (
         <div
