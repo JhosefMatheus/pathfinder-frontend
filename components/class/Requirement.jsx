@@ -51,16 +51,12 @@ export default function Requirement({ requirement, requirementsPathfinder, setRe
 
     function handleChangeRequirement() {
         if (checkedRequirement) {
-            console.log("caiu no primeiro if.");
-
             const requirementPathfinderIndex = requirementsPathfinder.findIndex(e => e.requirementId === requirementPathfinder.requirementId);
 
             requirementsPathfinder[requirementPathfinderIndex].status = "excluído";
 
             requirementPathfinder.status = "excluído";
         } else {
-            console.log("caiu no segundo if.");
-
             const currentRequirementPathfinder = new RequirementPathfinderModel({
                 pathfinderId: router.query.id,
                 requirementId: requirement.id,
@@ -70,16 +66,12 @@ export default function Requirement({ requirement, requirementsPathfinder, setRe
             const requirementPathfinderExists = requirementsPathfinder.some(e => e.requirementId === currentRequirementPathfinder.requirementId);
 
             if (requirementPathfinderExists) {
-                console.log("requisito do desbravador já está na lista.");
-
                 const requirementPathfinderIndex = requirementsPathfinder.findIndex(e => e.requirementId === currentRequirementPathfinder.requirementId);
 
                 requirementsPathfinder[requirementPathfinderIndex].status = "adicionado";
 
                 requirementPathfinder.status = "adicionado";
             } else {
-                console.log("requisito do desbravador não está na lista ainda.");
-
                 setRequirementPathfinder(currentRequirementPathfinder);
 
                 setRequirementsPathfinder([...requirementsPathfinder, currentRequirementPathfinder]);

@@ -40,6 +40,8 @@ export default function ClassPage() {
         const token = localStorage.getItem("token");
 
         await currentRequirementsPathfinder.saveRequirementsPathfinder(token);
+
+        router.push(`/pathfinders/classes/${router.query.id}`);
     }
 
     return (
