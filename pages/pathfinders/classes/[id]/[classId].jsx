@@ -6,6 +6,7 @@ import RequirementGroups from "../../../../components/class/RequirementGroups";
 import Layout from "../../../../components/Layout";
 import PrivateRoute from "../../../../components/PrivateRoute";
 import ClassModel from "../../../../models/ClassModel";
+import RequirementsPathfinderModel from "../../../../models/RequirementsPathfinderModel";
 
 export default function ClassPage() {
     const [currentClass, setCurrentClass] = useState(null);
@@ -33,6 +34,14 @@ export default function ClassPage() {
         }
     }, [router.query.classId]);
 
+    async function saveRequirementsPathfinder() {
+        const currentRequirementsPathfinder = new RequirementsPathfinderModel({ requirementsPathfinder });
+
+        const token = localStorage.getItem("token");
+
+        await currentRequirementsPathfinder.saveRequirementsPathfinder(token);
+    }
+
     return (
         <PrivateRoute>
             <Layout>
@@ -50,6 +59,7 @@ export default function ClassPage() {
                     }
                     <RequirementGroups
                         requirementsPathfinder={requirementsPathfinder}
+                        setRequirementsPathfinder={setRequirementsPathfinder}
                     />
                     <Button
                         variant="contained"
@@ -59,6 +69,7 @@ export default function ClassPage() {
                             left: "90%",
                             borderRadius: 50
                         }}
+                        onClick={saveRequirementsPathfinder}
                     >
                         Salvar
                     </Button>

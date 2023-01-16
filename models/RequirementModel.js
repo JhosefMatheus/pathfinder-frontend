@@ -1,4 +1,5 @@
 import nextConfig from "../next.config";
+import RequirementPathfinderModel from "./RequirementPathfinderModel";
 import SubRequirementModel from "./SubRequirementModel";
 import SubRequirementsModel from "./SubRequirementsModel";
 
@@ -59,9 +60,16 @@ export default class RequirementModel {
         const { message, requirementPathfinder } = await getRequirementPathfinderResponse.json();
 
         if (getRequirementPathfinderResponse.status === 200) {
+            const returnedRequirementPathfinder = new RequirementPathfinderModel({
+                id: requirementPathfinder.id,
+                pathfinderId: requirementPathfinder.pathfinderId,
+                requirementId: requirementPathfinder.requirementId,
+                status: "normal"
+            });
+
             return {
                 flag: true,
-                requirementPathfinder
+                requirementPathfinder: returnedRequirementPathfinder
             }
         }
 

@@ -1,6 +1,6 @@
 import Requirements from "./Requirements";
 
-export default function RequirementGroup({ requirementGroup, requirementsPathfinder }) {
+export default function RequirementGroup({ requirementGroup, requirementsPathfinder, setRequirementsPathfinder }) {
     return (
         <li
             style={{
@@ -15,6 +15,7 @@ export default function RequirementGroup({ requirementGroup, requirementsPathfin
             <Requirements
                 requirementGroupId={requirementGroup.id}
                 requirementsPathfinder={requirementsPathfinder}
+                setRequirementsPathfinder={setRequirementsPathfinder}
             />
         </li>
     );

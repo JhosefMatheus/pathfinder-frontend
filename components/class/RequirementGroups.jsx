@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import RequirementGroup from "./RequirementGroup";
 import RequirementGroupsModel from "../../models/RequirementGroupsModel";
 
-export default function RequirementGroups({ requirementsPathfinder }) {
+export default function RequirementGroups({ requirementsPathfinder, setRequirementsPathfinder }) {
     const [requirementGroups, setRequirementGroups] = useState([]);
 
     useEffect(() => {
@@ -29,6 +29,7 @@ export default function RequirementGroups({ requirementsPathfinder }) {
                     <RequirementGroup
                         requirementGroup={requirementGroup}
                         requirementsPathfinder={requirementsPathfinder}
+                        setRequirementsPathfinder={setRequirementsPathfinder}
                     />
                 ))
             }

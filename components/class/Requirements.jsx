@@ -4,7 +4,7 @@ import RequirementsModel from "../../models/RequirementsModel";
 import nextConfig from "../../next.config";
 import Requirement from "./Requirement";
 
-export default function Requirements({ requirementGroupId, requirementsPathfinder }) {
+export default function Requirements({ requirementGroupId, requirementsPathfinder, setRequirementsPathfinder }) {
     const router = useRouter();
     
     const [requirements, setRequirements] = useState([]);
@@ -36,6 +36,7 @@ export default function Requirements({ requirementGroupId, requirementsPathfinde
                     <Requirement
                         requirement={requirement}
                         requirementsPathfinder={requirementsPathfinder}
+                        setRequirementsPathfinder={setRequirementsPathfinder}
                     />
                 ))
             }
