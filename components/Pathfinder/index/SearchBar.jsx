@@ -5,8 +5,16 @@ import {
 } from "@mui/material";
 
 import SearchIcon from "@mui/icons-material/Search";
+import { useContext } from "react";
+import { UserContext } from "../../../providers/UserProvider";
 
-export default function PathfinderSearchBar() {
+export default function PathfinderSearchBar({ pathfinders, setPathfinders }) {
+    const provider = useContext(UserContext);
+
+    function searchPathfinder(event) {
+        event.target.value ? setPathfinders(pathfinders.filter(element => element.name.includes(event.target.value))) : setPathfinders(provider.pathfinders);
+    }
+
     return (
         <Box
             sx={{
@@ -27,6 +35,7 @@ export default function PathfinderSearchBar() {
                 sx={{
                     width: "50%"
                 }}
+                onChange={searchPathfinder}
             />
         </Box>
     );

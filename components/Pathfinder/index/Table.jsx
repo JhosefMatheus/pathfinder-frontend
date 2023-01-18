@@ -15,9 +15,7 @@ export default function PathfinderTable({ pathfinders, setOpenError, setErrorMes
     async function deletePathfinder(pathfinder) {
         const token = localStorage.getItem("token");
 
-        const currentPathfinder = new PathfinderModel({ ...pathfinder });
-
-        const { message, flag } = await currentPathfinder.deletePathfinder(token);
+        const { message, flag } = await pathfinder.deletePathfinder(token);
 
         if (flag) {
             router.reload();

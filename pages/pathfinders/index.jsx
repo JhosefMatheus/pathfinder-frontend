@@ -27,6 +27,16 @@ export default function Pathfinders() {
             const { pathfinders } = await user.getPathfinders(token);
 
             setPathfinders(pathfinders);
+            
+            provider.setPathfinders(pathfinders);
+
+            localStorage.setItem("pathfinders", JSON.stringify(pathfinders.map(e => {
+                return {
+                    id: e.id,
+                    name: e.name,
+                    userId: e.userId
+                }
+            })));
         }
 
         if (provider.user) {
@@ -53,7 +63,10 @@ export default function Pathfinders() {
                         )
                     }
                     <Header />
-                    <SearchBar />
+                    <SearchBar
+                        pathfinders={pathfinders}
+                        setPathfinders={setPathfinders}
+                    />
                     <Table
                         pathfinders={pathfinders}
                         setOpenError={setOpenError}

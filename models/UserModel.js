@@ -1,4 +1,5 @@
 import nextConfig from "../next.config";
+import PathfinderModel from "./PathfinderModel";
 
 export default class UserModel {
     #id;
@@ -132,7 +133,7 @@ export default class UserModel {
         if (getPathfindersResponse.status === 200) {
             return {
                 flag: true,
-                pathfinders
+                pathfinders: pathfinders.map(e => new PathfinderModel({ id: e.id, name: e.name, userId: e.userId }))
             }
         }
     }
