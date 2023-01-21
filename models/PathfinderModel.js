@@ -112,4 +112,19 @@ export default class PathfinderModel {
             }
         }
     }
+
+    async getPathfinderClassesProgress(token) {
+        const getPathfinderClassesProgressResponse = await fetch(`${nextConfig.urlApi.dev}/pathfinder/classesProgress/${this.#id}`, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        const { classesProgress } = await getPathfinderClassesProgressResponse.json();
+
+        return classesProgress;
+    }
 }

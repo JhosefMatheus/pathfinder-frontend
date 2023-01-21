@@ -44,6 +44,10 @@ export default function ClassPage() {
         router.push(`/pathfinders/classes/${router.query.id}`);
     }
 
+    useEffect(() => {
+        console.log(requirementsPathfinder);
+    }, [requirementsPathfinder]);
+
     return (
         <PrivateRoute>
             <Layout>

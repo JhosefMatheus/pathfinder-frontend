@@ -24,15 +24,33 @@ export default function Requirement({ requirement, requirementsPathfinder, setRe
     }, []);
 
     useEffect(() => {
+        if (requirementPathfinder && !requirementPathfinderFlag) {
+            setCheckedRequirement(true);
+
+            setRequirementPathfinderFlag(true);
+        }
+    }, [requirementPathfinder]);
+
+    useEffect(() => {
         async function getRequirementPathfinder() {
             const token = localStorage.getItem("token");
 
             const { flag, requirementPathfinder } = await requirement.getRequirementPathfinder(token, router.query.id);
 
             if (flag) {
-                setRequirementPathfinder(requirementPathfinder);
+                const dadosTemp = requirementsPathfinder;
 
-                setRequirementsPathfinder([...requirementsPathfinder, requirementPathfinder]);
+                const requirementPathfinderExists = dadosTemp.some(e => e.id === requirementPathfinder.id);
+
+                if (!requirementPathfinderExists) {
+                    dadosTemp.push(requirementPathfinder);
+    
+                    setRequirementsPathfinder(dadosTemp);
+    
+                    setRequirementPathfinder(requirementPathfinder);
+
+                    console.log(dadosTemp);
+                }
             }
         }
 
@@ -40,14 +58,6 @@ export default function Requirement({ requirement, requirementsPathfinder, setRe
             getRequirementPathfinder();
         }
     }, [router.query.id]);
-
-    useEffect(() => {
-        if (requirementPathfinder && !requirementPathfinderFlag) {
-            setCheckedRequirement(true);
-
-            setRequirementPathfinderFlag(true);
-        }
-    }, [requirementPathfinder]);
 
     function handleChangeRequirement() {
         if (checkedRequirement) {
